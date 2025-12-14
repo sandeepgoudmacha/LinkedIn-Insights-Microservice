@@ -1,0 +1,521 @@
+{
+  "info": {
+    "name": "LinkedIn Insights Microservice API",
+    "description": "Collection of API endpoints for LinkedIn Insights Microservice",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Health & Status",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "Check if the API is healthy and running"
+          },
+          "response": []
+        },
+        {
+          "name": "API Version",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/version",
+              "host": ["{{base_url}}"],
+              "path": ["api", "version"]
+            },
+            "description": "Get API version information"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pages - List & Search",
+      "item": [
+        {
+          "name": "Get All Pages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages?page=1&per_page=20",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (default: 1)"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Items per page (default: 20, max: 100)"
+                }
+              ]
+            },
+            "description": "Get all stored pages with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Follower Range",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages?min_followers=10000&max_followers=100000&page=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages"],
+              "query": [
+                {
+                  "key": "min_followers",
+                  "value": "10000",
+                  "description": "Minimum follower count"
+                },
+                {
+                  "key": "max_followers",
+                  "value": "100000",
+                  "description": "Maximum follower count"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Get pages filtered by follower count range"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Industry",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages?industry=Technology&page=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages"],
+              "query": [
+                {
+                  "key": "industry",
+                  "value": "Technology",
+                  "description": "Filter by industry"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Get pages filtered by industry"
+          },
+          "response": []
+        },
+        {
+          "name": "Search by Page Name",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages?name=Google&page=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Google",
+                  "description": "Search by page name (partial match)"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Search pages by name"
+          },
+          "response": []
+        },
+        {
+          "name": "Advanced Filtering",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages?min_followers=5000&max_followers=50000&industry=Software&name=tech&page=1&per_page=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages"],
+              "query": [
+                {
+                  "key": "min_followers",
+                  "value": "5000"
+                },
+                {
+                  "key": "max_followers",
+                  "value": "50000"
+                },
+                {
+                  "key": "industry",
+                  "value": "Software"
+                },
+                {
+                  "key": "name",
+                  "value": "tech"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get pages with multiple filters applied"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pages - Single Page Details",
+      "item": [
+        {
+          "name": "Get Page Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/google?include_posts=true&include_followers=false&include_employees=false",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "google"],
+              "query": [
+                {
+                  "key": "include_posts",
+                  "value": "true",
+                  "description": "Include recent posts"
+                },
+                {
+                  "key": "include_followers",
+                  "value": "false",
+                  "description": "Include followers list"
+                },
+                {
+                  "key": "include_employees",
+                  "value": "false",
+                  "description": "Include employees list"
+                }
+              ]
+            },
+            "description": "Get detailed information about a specific page with optional related data"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Page with All Data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/microsoft?include_posts=true&include_followers=true&include_employees=true",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "microsoft"],
+              "query": [
+                {
+                  "key": "include_posts",
+                  "value": "true"
+                },
+                {
+                  "key": "include_followers",
+                  "value": "true"
+                },
+                {
+                  "key": "include_employees",
+                  "value": "true"
+                }
+              ]
+            },
+            "description": "Get page details including posts, followers, and employees"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pages - Posts",
+      "item": [
+        {
+          "name": "Get Recent Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/google/posts?page=1&per_page=15&sort_by=recent",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "google", "posts"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "key": "per_page",
+                  "value": "15",
+                  "description": "Posts per page (max: 50)"
+                },
+                {
+                  "key": "sort_by",
+                  "value": "recent",
+                  "description": "Sort order: recent, popular, engagement"
+                }
+              ]
+            },
+            "description": "Get recent posts from a page with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Popular Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/google/posts?page=1&per_page=10&sort_by=popular",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "google", "posts"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                },
+                {
+                  "key": "sort_by",
+                  "value": "popular",
+                  "description": "Sort by popularity (likes)"
+                }
+              ]
+            },
+            "description": "Get posts sorted by popularity"
+          },
+          "response": []
+        },
+        {
+          "name": "Get High Engagement Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/google/posts?page=1&per_page=10&sort_by=engagement",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "google", "posts"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                },
+                {
+                  "key": "sort_by",
+                  "value": "engagement",
+                  "description": "Sort by engagement rate"
+                }
+              ]
+            },
+            "description": "Get posts with highest engagement rates"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pages - Followers",
+      "item": [
+        {
+          "name": "Get Followers/Audience",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/google/followers?page=1&per_page=20",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "google", "followers"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Followers per page (max: 100)"
+                }
+              ]
+            },
+            "description": "Get followers/audience of a page with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Employees",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/google/employees?page=1&per_page=20",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "google", "employees"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Get employees working at the company"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Scraping",
+      "item": [
+        {
+          "name": "Scrape New Page - Basic",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page_id\": \"deepsolv\",\n  \"depth\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pages/scrape",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "scrape"]
+            },
+            "description": "Scrape a LinkedIn page and store basic details. Depth=1 means only fetch page details."
+          },
+          "response": []
+        },
+        {
+          "name": "Scrape New Page - Deep",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page_id\": \"google\",\n  \"depth\": 2\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pages/scrape",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "scrape"]
+            },
+            "description": "Scrape a LinkedIn page with posts and employees. Depth=2 enables background scraping of posts."
+          },
+          "response": []
+        },
+        {
+          "name": "Scrape Page - Full Depth",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page_id\": \"microsoft\",\n  \"depth\": 3\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pages/scrape",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "scrape"]
+            },
+            "description": "Scrape page with maximum depth (posts, employees, analytics)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Analytics & Insights",
+      "item": [
+        {
+          "name": "Get Page Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/google/analytics",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "google", "analytics"]
+            },
+            "description": "Get analytics and metrics for a page including engagement rates and AI summary"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate AI Summary",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/google/generate-summary",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "google", "generate-summary"]
+            },
+            "description": "Generate AI-powered summary of the page. Runs asynchronously - check analytics endpoint for results."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}

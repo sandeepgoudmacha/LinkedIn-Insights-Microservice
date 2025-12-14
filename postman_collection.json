@@ -1,0 +1,394 @@
+{
+  "info": {
+    "_postman_id": "linkedin-insights-api-v1",
+    "name": "LinkedIn Insights API - Complete",
+    "description": "Complete API testing collection for LinkedIn Insights Microservice\n\nAll endpoints tested and working with REAL LinkedIn data",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "🔧 Server Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "Check if server is healthy and running"
+          },
+          "response": []
+        },
+        {
+          "name": "API Version",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/version",
+              "host": ["{{base_url}}"],
+              "path": ["api", "version"]
+            },
+            "description": "Get API version and environment info"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📄 Pages - List & Details",
+      "item": [
+        {
+          "name": "Get All Pages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages?sort_by=followers_count&order=desc",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages"],
+              "query": [
+                {
+                  "key": "sort_by",
+                  "value": "followers_count"
+                },
+                {
+                  "key": "order",
+                  "value": "desc"
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "per_page",
+                  "value": "20",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Get all scraped LinkedIn pages with pagination and sorting"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Page by ID (Eightfold AI)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/eightfoldai",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "eightfoldai"]
+            },
+            "description": "Get detailed information about Eightfold AI (REAL DATA: 152,472 followers)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Page by ID (Google)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/google",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "google"]
+            },
+            "description": "Get detailed information about Google (REAL DATA: ~39M followers)"
+          },
+          "response": []
+        },
+        {
+          "name": "Search Pages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages?search=eightfold",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "eightfold"
+                }
+              ]
+            },
+            "description": "Search for pages by company name"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Followers Range",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages?min_followers=100000&max_followers=10000000",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages"],
+              "query": [
+                {
+                  "key": "min_followers",
+                  "value": "100000"
+                },
+                {
+                  "key": "max_followers",
+                  "value": "10000000"
+                }
+              ]
+            },
+            "description": "Filter pages by follower count range"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Industry",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages?industry=Software",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages"],
+              "query": [
+                {
+                  "key": "industry",
+                  "value": "Software"
+                }
+              ]
+            },
+            "description": "Filter pages by industry"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔍 Scraping",
+      "item": [
+        {
+          "name": "Scrape New Page (Eightfold AI)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page_id\": \"eightfoldai\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pages/scrape",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "scrape"]
+            },
+            "description": "Scrape REAL LinkedIn data for Eightfold AI (wait 20-30 seconds)\n\nExpected: followers_count: 152472 (REAL data, not fake)"
+          },
+          "response": []
+        },
+        {
+          "name": "Scrape New Page (Google)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page_id\": \"google\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pages/scrape",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "scrape"]
+            },
+            "description": "Scrape REAL LinkedIn data for Google\n\nExpected: followers_count: ~39,000,000"
+          },
+          "response": []
+        },
+        {
+          "name": "Scrape New Page (Microsoft)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page_id\": \"microsoft\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pages/scrape",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "scrape"]
+            },
+            "description": "Scrape REAL LinkedIn data for Microsoft"
+          },
+          "response": []
+        },
+        {
+          "name": "Scrape New Page (Amazon)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page_id\": \"amazon\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pages/scrape",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "scrape"]
+            },
+            "description": "Scrape REAL LinkedIn data for Amazon"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📊 Page Details",
+      "item": [
+        {
+          "name": "Get Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/eightfoldai/posts?limit=5&sort_by=posted_at&order=desc",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "eightfoldai", "posts"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5"
+                },
+                {
+                  "key": "sort_by",
+                  "value": "posted_at"
+                },
+                {
+                  "key": "order",
+                  "value": "desc"
+                }
+              ]
+            },
+            "description": "Get recent posts from a company page"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Followers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/eightfoldai/followers?per_page=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "eightfoldai", "followers"],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get followers of a company page"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Employees",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/eightfoldai/employees?per_page=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "eightfoldai", "employees"],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get employees of a company page"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/pages/eightfoldai/analytics",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "eightfoldai", "analytics"]
+            },
+            "description": "Get analytics and metrics for a company page"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🤖 AI Features",
+      "item": [
+        {
+          "name": "Generate AI Summary",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"gpt-3.5-turbo\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pages/eightfoldai/generate-summary",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pages", "eightfoldai", "generate-summary"]
+            },
+            "description": "Generate AI-powered summary using OpenAI (requires OPENAI_API_KEY in .env)"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}
