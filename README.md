@@ -149,6 +149,7 @@ curl -X POST http://localhost:8000/api/pages/scrape \
     "employees_count": 221000,
     "industry": "Software Development",
     "headquarters": "Redmond, Washington",
+    "profile_picture_url": "https://media.licdn.com/dms/image/...",
     "website": "microsoft.com",
     "description": "Microsoft is a technology company...",
     "created_at": "2025-12-14T10:37:15.326965",
@@ -691,5 +692,3 @@ google-generativeai==0.3.0  # For Gemini API
 - Test scripts included
 
 ---
-
-er**: Google Gemini
